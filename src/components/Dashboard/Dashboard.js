@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import uuid from 'uuid/v1';
 import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import Controls from '../Controls/Controls';
 import TransactionHistory from '../TransactionHistory/TransactionHistory';
 import Balance from '../Balance/Balance';
@@ -11,6 +12,29 @@ export default class Dashboard extends Component {
     balance: 0,
     amount: 0,
   };
+
+  componentDidMount() {
+    try {
+      const transactionsLS = localStorage.getItem('transactions');
+      const balanceLS = localStorage.getItem('balance');
+      if (transactionsLS && balanceLS) {
+        this.setState({
+          transactions: JSON.parse(transactionsLS),
+          balance: JSON.parse(balanceLS),
+        });
+      }
+    } catch (error) {
+      alert('Error LS');
+    }
+  }
+
+  componentDidUpdate(prevProps, prevState) {
+    const { transactions, balance } = this.state;
+    if (prevState.transactions !== transactions) {
+      localStorage.setItem('transactions', JSON.stringify(transactions));
+      localStorage.setItem('balance', JSON.stringify(balance));
+    }
+  }
 
   addToTransactions = type => {
     const { amount } = this.state;
@@ -56,17 +80,16 @@ export default class Dashboard extends Component {
 
   render() {
     const { balance, transactions, amount } = this.state;
-    const income = Number(
+    const income = +Number(
       transactions.reduce((acc, items) => {
         return items.type === 'DEPOSIT' ? acc + items.amount : acc;
       }, 0),
     ).toFixed(2);
-    const expenses = Number(
+    const expenses = +Number(
       transactions.reduce((acc, items) => {
         return items.type === 'WITHDRAW' ? acc + items.amount : acc;
       }, 0),
     ).toFixed(2);
-
     return (
       <div>
         <Controls
