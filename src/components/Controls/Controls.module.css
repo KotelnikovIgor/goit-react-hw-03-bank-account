@@ -1,0 +1,33 @@
+.controls {
+  margin: 0 auto;
+  padding: 50px 50px;
+  display: flex;
+  justify-content: center;
+  justify-items: center;
+  background-color: blue;
+}
+
+.input__controls {
+  width: 250px;
+  outline: none;
+  border: none;
+  height: 30px;
+  border-radius: 10px;
+  padding-left: 10px;
+}
+
+.button__deposit {
+  width: 150px;
+  border-radius: 10px;
+  outline: none;
+  border: none;
+  background-color: cornflowerblue;
+}
+
+.button__withdraw {
+  width: 150px;
+  border-radius: 10px;
+  outline: none;
+  border: none;
+  background-color: cornflowerblue;
+}

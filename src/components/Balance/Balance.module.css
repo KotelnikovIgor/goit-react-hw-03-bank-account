@@ -1,0 +1,21 @@
+.balance {
+  margin: 0 auto;
+  padding: 0;
+  display: flex;
+  justify-content: center;
+}
+
+.span__income {
+  margin: 0;
+  padding: 10px 10px;
+}
+
+.span__expenses {
+  margin: 0;
+  padding: 10px 10px;
+}
+
+.span__balance {
+  margin: 0;
+  padding: 10px 10px;
+}
